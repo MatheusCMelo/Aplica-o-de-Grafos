@@ -10,7 +10,7 @@ class Graph(object):
 					If no dictionary or None is given, an empty dictionary will be used
 			"""
 			if graph_dict == None:
-					graph_dict = {}
+				graph_dict = {}
 			self.__graph_dict = graph_dict
 
 	def vertices(self):
@@ -260,7 +260,8 @@ class Graph(object):
 		for X_vertex in X:
 			for self_vertex in self.__graph_dict[X_vertex]:
 				edge = (X_vertex, self_vertex)
-				if edge not in edges:
+				inversed_edge = (self_vertex, X_vertex)
+				if inversed_edge not in edges:
 					edges.append(edge)
 		return edges
 
@@ -271,15 +272,15 @@ if __name__ == "__main__":
 
 
 	g = {
-		"a" : ["b"],
+		"a" : ["b", "c"],
 		"b" : ["a", "c"],
-		"c" : ["b"]
+		"c" : ["b", "a"]
 	}
 
 	g2 = {
 		"a" : ["b", "c"],
 		"b" : ["a"],
-		"c" : ["a"]
+		"c" : ["b"]
 	}
 
 	graph = Graph(g)
