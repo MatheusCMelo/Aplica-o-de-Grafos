@@ -227,9 +227,12 @@ class Graph(object):
 	# METODOS IMPLEMENTADOS PARA A PRATICA 01
 
 	def is_simple(self):
+		"""checks if this graph is a simple graph"""
 		for control_vertex in self.__graph_dict.keys():
+
 			if control_vertex in self.__graph_dict[control_vertex]:
 				return False
+
 			if len(self.__graph_dict[control_vertex]) != len(set(self.__graph_dict[control_vertex])):
 				return False
 		return True
@@ -266,17 +269,23 @@ class Graph(object):
 
 	def edge_cut(self,X):
 		"""returns a tuple list, which each tuple represents a edge"""
-
 		edges = []
-		for X_vertex in X:
-			for self_vertex in self.__graph_dict[X_vertex]:
-				edge = (X_vertex, self_vertex)
-				inversed_edge = (self_vertex, X_vertex)
-				if inversed_edge not in edges:
-					edges.append(edge)
+
+		if self.contains(X):
+			for X_vertex in X:
+				for self_vertex in self.__graph_dict[X_vertex]:
+					edge = (X_vertex, self_vertex)
+					inversed_edge = (self_vertex, X_vertex)
+					if inversed_edge not in edges:
+						edges.append(edge)
 		return edges
 
-
+	def contains(self, vertex_list):
+		"""checks if this graph has the vertices on vertex_list"""
+		for vertex in vertex_list:
+			if not self.__graph_dict.has_key(vertex):
+				return False
+		return True
 
 
 if __name__ == "__main__":
@@ -304,6 +313,7 @@ if __name__ == "__main__":
 	print graph.edge_cut(X)
 	print graph2.edge_cut(X)
 
+	print graph.contains(X)
 
 # if __name__ == "__main__":
 
