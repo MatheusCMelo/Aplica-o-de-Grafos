@@ -226,8 +226,19 @@ class Graph(object):
 
 	# METODOS IMPLEMENTADOS PARA A PRATICA 01
 
+	def is_simple(self):
+		for control_vertex in self.__graph_dict.keys():
+			if control_vertex in self.__graph_dict[control_vertex]:
+				return False
+			if len(self.__graph_dict[control_vertex]) != len(set(self.__graph_dict[control_vertex])):
+				return False
+		return True
+
 	def is_complete(self):
 		""" checks if the graph is complete """
+		if not self.is_simple():
+			return False
+
 		if len(self.find_isolated_vertices()) > 0:
 			return False
 
@@ -279,7 +290,7 @@ if __name__ == "__main__":
 
 	g2 = {
 		"a" : ["b", "c"],
-		"b" : ["a"],
+		"b" : ["a", "a"],
 		"c" : ["b"]
 	}
 
